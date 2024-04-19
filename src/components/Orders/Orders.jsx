@@ -1,13 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Cart from '../Cart/Cart';
 import { Link, useLoaderData } from 'react-router-dom';
 import ReviewItem from '../ReviewItem/ReviewItem';
 import './Orders.css';
 import { deleteShoppingCart, removeFromDb } from '../../utilities/fakedb';
+import axios from 'axios';
+import useAuth from '../../hooks/useAuth';
 
 const Orders = () => {
-    const savedCart = useLoaderData();
-    const [cart, setCart] = useState(savedCart);
+    const {user}= useAuth()
+    
+    const [cart, setCart] = useState([]);
+    useEffect(()=>{
+        axios.get(`http://localhost:5000/orders?email=${user.email}`, {withCredentials: true})
+        .then(res => setCart(res.data))
+    },[])
 
     const handleRemoveFromCart = (id) => {
         const remaining = cart.filter(product => product._id !== id);

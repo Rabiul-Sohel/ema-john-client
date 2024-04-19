@@ -3,6 +3,7 @@ import { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Providers/AuthProvider';
 import useAuth from '../../hooks/useAuth';
+import axios from 'axios';
 
 const Login = () => {
     const {signinUser} = useAuth()
@@ -14,6 +15,8 @@ const Login = () => {
         const password = form.password.value;
         signinUser(email, password)
             .then(res => {
+                axios.post('http://localhost:5000/jwt', {email},{withCredentials: true})
+                    .then(res => console.log(res.data))
                 console.log(res.user)
                 navigate('/')
             })

@@ -3,7 +3,10 @@ import useAuth from "../hooks/useAuth";
 
 
 const PrivateRoute = ({children}) => {
-    const {user} = useAuth()
+    const {user, loading} = useAuth()
+    if(loading){
+        return <div style={{display: 'flex', height: '70vh', alignItems: 'center', justifyContent: 'center', fontSize: '30px'}}>Loading...</div>
+    }
     if(user){
         return children
     }

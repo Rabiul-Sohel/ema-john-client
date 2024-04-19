@@ -29,7 +29,7 @@ const router = createBrowserRouter([
       {
         path: 'orders',
         element: <PrivateRoute><Orders></Orders></PrivateRoute>,
-        loader: cartProductsLoader
+        
       },
       {
         path: 'inventory',

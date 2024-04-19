@@ -7,6 +7,9 @@ const Product = (props) => {
 
     const { img, name, seller, ratings, price } = props.product;
     const handleAddToCart = props.handleAddToCart;
+    const user = props.user;
+    props.product.customer_email = user?.email;
+    // console.log(user.email);
 
 
     return (
